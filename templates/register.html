@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Royhatdan otish bolimi</title>
+</head>
+<body>
+<a>Royhatdan otish</a>
+<form method="post", action="{% url 'user:register_page' %}" > {% csrf_token %}
+
+    {{ form.as_p }}
+
+<!--    <label for="username">Username: </label>-->
+<!--    <input id="username" type="text" name="username"> <br> <br>-->
+
+<!--    <label for="first_name">Firstname: </label>-->
+<!--    <input id="first_name" type="text" name="first_name"> <br> <br>-->
+
+<!--    <label for="last_name">Last_name: </label>-->
+<!--    <input id="last_name" type="text" name="last_name"> <br> <br>-->
+
+<!--    <label for="email">Email: </label>-->
+<!--    <input id="email" type="email" name="email"> <br> <br>-->
+
+<!--    <label for="password">Password: </label>-->
+<!--    <input id="password" type="password" name="password"> <br> <br>-->
+
+    <button type="submit"> Yuborish </button>
+
+</form>
+</body>
+</html>

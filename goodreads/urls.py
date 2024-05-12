@@ -8,6 +8,7 @@ from goodreads.view import landing_page
 urlpatterns = [
     path('', landing_page.as_view(), name='landing_page'),
     path('users/', include('user.url')),
+    path('book/', include('book.urls')),
     path('admin/', admin.site.urls),
 ]
 

@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user
-from django.contrib.auth.models import User
+from .models import CustomUser
 from django.test import TestCase
 from django.urls import reverse
 
@@ -16,7 +16,7 @@ class TestRegistration(TestCase):
                 'password':'somepassword'
             }
         )
-        user = User.objects.get(username='Muhammadziyo0568')
+        user = CustomUser.objects.get(username='Muhammadziyo0568')
         self.assertEqual(user.first_name, 'Muhammadziyo')
         self.assertEqual(user.last_name, 'Komiljanov')
         self.assertEqual(user.email, 'muhammadziyo056@gmail.com')
@@ -30,7 +30,7 @@ class TestRegistration(TestCase):
                 'password':'somepassword'
             }
         )
-        user_count = User.objects.count()
+        user_count = CustomUser.objects.count()
         self.assertEqual(user_count, 0)
         self.assertFormError(response, 'form','username','This field is required.')
 
@@ -50,13 +50,13 @@ class TestRegistration(TestCase):
                 'email':'Muhammadziyo0265@gamil.com',
             }
         )
-        user_count = User.objects.count()
+        user_count = CustomUser.objects.count()
         self.assertEqual(user_count, 0)
         self.assertFormError(response, 'form','password','Invalid Password.')
 
 class LoginTest(TestCase):
     def test_success_login(self):
-        db_user = User.objects.create(username='Muhammadziyo056', first_name='Muhammadziyo')
+        db_user = CustomUser.objects.create(username='Muhammadziyo056', first_name='Muhammadziyo')
         db_user.set_password('somepassword')
         db_user.save()
 

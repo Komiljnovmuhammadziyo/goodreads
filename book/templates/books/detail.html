@@ -1,13 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Book detail page</title>
-</head>
-<body>
-<h1>Book detail page</h1>
+{% extends 'base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="row mb-4">
+    <div class="col-2">
+        <img class="cover-pic" src="{{ book.image.url }}">
+    </div>
 
-<h4>{{ book.title }}</h4>
-<p>{{ book.desk }}</p>
-</body>
-</html>
+    <div class="col-5 ms-5">
+        <h5>{{ book.title  }}</h5>
+        {% if book.bookauthor_set.all %}
+            <span class="fst-italic">
+                Written by -
+                {% for book_author in book.bookauthor_set.all %}
+                    {% if forloop.last %}
+                        {{ book_author.author }}
+                    {% else %}
+                        {{ book_author.author }},
+                    {% endif %}
+                {% endfor %}
+            </span>
+        {% endif %}
+        <hr>
+        <p>
+            {{ book.desk }}
+        </p>
+    </div>
+</div>
+<div class="col-7">
+    <h2>Comments</h2>
+        <hr>
+    {% if comments %}
+        {% for comment in comments %}
+
+            <div class="row mb-5">
+                    <div class="col-2">
+                        <div style="height: 10px">
+                            <a href="{% url 'user:user_detail' comment.user_id %}"><img style="width: 60px; height: 60px; border-radius: 50%;"
+                                 src="{{ comment.user.profile_picture.url }}" alt="rasm">
+                            </a>
+                            <b>{{ comment.user }}</b>
+                        </div>
+                    </div>
+                    <div class="col-7">
+                        <p>{{ comment.stars }} stars
+                        {% if comment.user == request.user %}
+                            <a href="{% url 'book:edit-comment' book.id comment.id %}"><i class="bi bi-pen"></i></a>
+                            <a href="{% url 'book:delete-comment-message' book.id comment.id%}"><i class="bi bi-trash"></i></a>
+                    {% endif %}
+                        </p>
+                        <p>{{ comment.comment }}</p>
+                    </div>
+            </div>
+    {% endfor %}
+    {% endif %}
+</div>
+<div class="row me-3">
+    <div class="col-8">
+        <h4>Izoh qoldirish</h4>
+        <form method="post" action="{% url 'book:add-comment' book.id %}">
+            {% csrf_token %}
+            {{ form | crispy }}
+            <button type="submit" class="btn btn-success">Jo'natish</button>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

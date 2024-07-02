@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container posts-content">
+    <div class="row">
+        <div class="col-lg-6">
+            {% for comment in comments %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="media mb-3">
+                        <img src="{{ comment.user.profile_picture.url }}" class="d-block ui-w-40 rounded-circle" alt="">
+                        <div class="media-body ml-3">
+                            <b> {{ comment.user.username }}</b> by {{ comment.stars }} stars
+                        </div>
+                    </div>
+                    <p>
+                        {{ comment.book.created_at | date:'d M Y' }}
+                    </p>
+                    <p>
+                        {{ comment.comment }}
+                    </p>
+                    <center>
+                    <img class="cover-pic" src="{{ comment.book.image.url }}">
+                </center>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

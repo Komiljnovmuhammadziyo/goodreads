@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %} Book list page {% endblock %}
+
+
+{% block content %}
+    <h3>Users</h3>
+
+    {% if user %}
+        {% for users in user %}
+            <div class="row mb-4">
+                <div class="col-2">
+                    <a href="{% url 'user:user_detail' users.pk %}"><img src="{{ users.profile_picture.url }}" style="width: 90px; height: 90px; border-radius: 50%;"></a>
+                    <hr>
+                </div>
+                <div class="col-4 ms-12">
+                    <a href="{% url 'user:user_detail' users.pk %}">{{ users.username }}</a>
+                    <h6>{{ users.first_name }}</h6>
+                    <h6>{{ users.last_name }}</h6>
+                    <h6>{{ users.followers }}</h6>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        Now have not an users.
+    {% endif %}
+{% endblock %}

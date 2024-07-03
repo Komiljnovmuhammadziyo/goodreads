@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 
-from book.models import BookReview, Book
+from book.models import BookReview, Book, BookAuthor
 
 
 class CommentForm(forms.ModelForm):
@@ -23,4 +23,9 @@ class AddBookForm(ModelForm):
     class Meta:
         model = Book
         fields = ['title', 'desk', 'isbn']
-        
+
+
+class AddAuthorForm(ModelForm):
+    class Meta():
+        model = BookAuthor
+        fields = ['book', 'author']

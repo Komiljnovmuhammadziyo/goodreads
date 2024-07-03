@@ -8,8 +8,8 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import View, UpdateView, DeleteView
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from .models import BookReview
-from .forms import CommentForm, AddBookForm
+from .models import BookReview, BookAuthor
+from .forms import CommentForm, AddBookForm, AddAuthorForm
 import book
 from book.forms import CommentForm, EditCommentForm
 from book.models import Book, BookReview
@@ -129,3 +129,16 @@ class AddBookView( View):
             return redirect('book:list')
         return render(request, 'books/add_book.html', {'form':book_form})
 
+class AddBookAuthorView(View):
+    def get(self, request):
+        form = AddAuthorForm()
+
+        return render(request, 'books/add_author.html', {'form':form})
+    def post(self, request):
+        form = AddAuthorForm(data = request.POST, files = request.FILES)
+        if form.is_valid():
+            author = form.save()
+            author.save()
+            return redirect('book:list')
+
+        return render(request, 'books/add_author.html', {'form':form})

@@ -1,15 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>login</title>
-</head>
-<body>
-<a>Login page</a>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Kirish</button>
-    </form>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+{% if messages %}
+    {% for message in messages %}
+        <button type="button" class="btn btn-outline-success" disabled>{{ message }}</button>
+    {% endfor %}
+{% endif %}
+<h2>Login page</h2>
+<div class="row">
+    <div class="mx-5">
+        <div class="col-5">
+            <form method="post">
+                {% csrf_token %}
+                {{ form | crispy }}
+                    <button type="submit" class="btn btn-outline-primary">Login</button>
+                    If you have not account, please <a href="{% url 'user:register_page' %}">register now</a></p>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

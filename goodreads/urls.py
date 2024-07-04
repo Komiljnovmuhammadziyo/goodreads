@@ -10,7 +10,9 @@ urlpatterns = [
     path('home/', home_page.as_view(), name='home_page'),
     path('users/', include('user.urls')),
     path('book/', include('book.urls')),
+    path('api/', include('api.urls')),
     path('admin/', admin.site.urls),
+    path('api-auth/', include('rest_framework.urls'))
 ]
 
 if settings.DEBUG:

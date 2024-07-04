@@ -3,6 +3,7 @@
 {% url 'book:list' as book_page_url %}
 {% url 'user:profile' as user_profile_url %}
 {% url 'book:add-book' as add_book_url %}
+{% url 'book:add-author' as add_author_url %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -106,7 +107,7 @@
                     <a class="nav-link {% if request.path == add_book_url %} active {% endif %}" href="{% url 'book:add-book' %}">Add book</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="{% url 'book:add-author' %}">Add author</a>
+                    <a class="nav-link {% if request.path == add_author_url %} active {% endif %} active" href="{% url 'book:add-author' %}">Add author</a>
                 </li>
             {% endif %}
           {% endif %}

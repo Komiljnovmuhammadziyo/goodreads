@@ -111,6 +111,11 @@
                 </li>
             {% endif %}
           {% endif %}
+          {% if request.user.is_staff %}
+        <li class="nav-item">
+            <a class="nav-link active" href="{% url 'api:review-detail' 1 %}">API</a>
+        </li>
+          {% endif %}
         <li class="nav-item">
           <a class="nav-link {% if request.path == book_page_url %} active {% endif %}" href="{% url 'user:user_list'%}">Users</a>
         </li>

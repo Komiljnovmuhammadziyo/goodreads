@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.views import View
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -13,6 +15,19 @@ class BookReviewDetailAPIVIew(APIView):
         serializer = BookReviewDetailSerializer(book_review)
 
         return Response(serializer.data)
+
+
+
+class BookreviewListAPIView(APIView):
+
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        book_reviews = BookReview.objects.all().order_by('-created_at')
+        paginator = PageNumberPagination()
+        page_obj = paginator.paginate_queryset(book_reviews, request)
+        serializer = BookReviewDetailSerializer(page_obj, many=True)
+        return paginator.get_paginated_response(serializer.data)
 
 
 # class BookReviewDetailAPIVIew(View):

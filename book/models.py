@@ -37,6 +37,7 @@ class BookReview(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     comment = models.TextField()
     stars = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f'{self.stars} stars by {self.user}'

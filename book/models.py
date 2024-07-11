@@ -20,6 +20,7 @@ class Author(models.Model):
     last_name = models.CharField(max_length=100)
     email = models.EmailField()
     bio = models.TextField()
+    image = models.ImageField(upload_to='media-files')
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'

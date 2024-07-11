@@ -8,7 +8,7 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import View, UpdateView, DeleteView
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from .models import BookReview, BookAuthor
+from .models import BookReview, BookAuthor, Author
 from .forms import CommentForm, AddBookForm, AddAuthorForm
 import book
 from book.forms import CommentForm, EditCommentForm
@@ -142,3 +142,16 @@ class AddBookAuthorView(View):
             return redirect('book:list')
 
         return render(request, 'books/add_author.html', {'form':form})
+
+
+class BookAuthorDetailView(View):
+    author = Author.objects.all()
+    def get(self, request, author_id):
+        author = Author.objects.get(id=author_id)
+        book = BookAuthor.objects.filter(author = author)
+        # print(book)
+        context = {
+            'author': author,
+            'book':book
+        }
+        return render(request, 'books/author_detail.html',context)

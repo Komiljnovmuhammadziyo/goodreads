@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+        <button type="button" class="{{ message.tags }}" disabled>{{ message }}</button>
+    {% endfor %}
+{% endif %}
+
+<div class="row">
+    <div class="mx-5">
+        <div class="col-12">
+
+            <div class="row">
+                <div class="col-2">
+                    <img src="{{ author.image.url }}" alt="{{ user.username }}" style="width: 179px; height: 252px">
+                </div>
+                <div class="col-6">
+                    <div class="mx-5">
+                        <h1>{{ author.first_name }} {{ author.last_name }}</h1>
+                            <hr>
+                        <b>Email: </b> {{ author.email }} <br>
+                        <b>Bio:</b> {{ author.bio }} <br>
+                        <hr>
+                        <h1>Books</h1>
+                        {% for boo in book %}
+                        <div class="row">
+                            <div class="col-2">
+                                <a href="{% url 'book:detail' boo.book.id %}">
+                                    <img src="{{ boo.book.image.url }}" style="width: 50px; height: 70px">
+                                </a>
+                            </div>
+                            <div class="col-10">
+                                <a href="{% url 'book:detail' boo.book.id %}"> {{ boo.book.title }}</a><br> <br> <br>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

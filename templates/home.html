@@ -13,12 +13,14 @@
                             <b> {{ comment.user.username }}</b> by {{ comment.stars }} stars
                         </div>
                     </div>
+                    {% if 'user:follow_user' %}
                     <p>
                         {{ comment.book.created_at | date:'d M Y' }}
                     </p>
                     <p>
                         {{ comment.comment }}
                     </p>
+                    {% endif %}
                     <center>
                     <img class="cover-pic" src="{{ comment.book.image.url }}">
                 </center>

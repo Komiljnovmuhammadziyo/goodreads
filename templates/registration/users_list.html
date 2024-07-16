@@ -13,7 +13,7 @@
                     <hr>
                 </div>
                 <div class="col-4 ms-12">
-                    <a href="{% url 'user:user_detail' users.pk %}">{{ users.username }}</a>
+                    <a href="{% url 'user:user_detail' users.pk %}" class="black_title">{{ users.username }}</a>
                     <h6>{{ users.first_name }}</h6>
                     <h6>{{ users.last_name }}</h6>
                     <h6>{{ users.followers }}</h6>

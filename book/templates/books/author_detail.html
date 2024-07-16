@@ -8,6 +8,8 @@
     {% endfor %}
 {% endif %}
 
+
+
 <div class="row">
     <div class="mx-5">
         <div class="col-12">
@@ -32,7 +34,7 @@
                                 </a>
                             </div>
                             <div class="col-10">
-                                <a href="{% url 'book:detail' boo.book.id %}"> {{ boo.book.title }}</a><br> <br> <br>
+                                <a class="black_title" href="{% url 'book:detail' boo.book.id %}"> {{ boo.book.title }}</a><br> <br> <br>
                             </div>
                         </div>
                         {% endfor %}

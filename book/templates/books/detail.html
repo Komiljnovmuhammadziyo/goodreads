@@ -13,7 +13,7 @@
                 Written by -
                 {% for book_author in book.bookauthor_set.all %}
                     {% if forloop.last %}
-                        {{ book_author.author }}
+                        <a href="{% url 'book:author_detail' book_author.author.id %}">{{ book_author.author }}</a>
                     {% else %}
                         {{ book_author.author }},
                     {% endif %}
@@ -22,13 +22,25 @@
         {% endif %}
         <hr>
         <p>
-            {{ book.desk }}
+            {{ book.desk }} <br>
+            <b>Isbn:</b> {{ book.isbn }} <br>
+            <b>Created at:</b> {{ book.created_at }}
         </p>
     </div>
 </div>
 <div class="col-7">
     <h2>Comments</h2>
         <hr>
+    <div class="row me-3">
+        <div class="col-8">
+            <h4>Izoh qoldirish</h4>
+            <form method="post" action="{% url 'book:add-comment' book.id %}">
+                {% csrf_token %}
+                {{ form | crispy }}
+                <button type="submit" class="btn btn-success">Jo'natish</button> <br> <br>
+            </form>
+        </div>
+    </div>
     {% if comments %}
         {% for comment in comments %}
 
@@ -54,15 +66,6 @@
     {% endfor %}
     {% endif %}
 </div>
-<div class="row me-3">
-    <div class="col-8">
-        <h4>Izoh qoldirish</h4>
-        <form method="post" action="{% url 'book:add-comment' book.id %}">
-            {% csrf_token %}
-            {{ form | crispy }}
-            <button type="submit" class="btn btn-success">Jo'natish</button>
-        </form>
-    </div>
-</div>
+
 
 {% endblock content %}

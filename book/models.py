@@ -20,6 +20,7 @@ class Author(models.Model):
     last_name = models.CharField(max_length=100)
     email = models.EmailField()
     bio = models.TextField()
+    image = models.ImageField(upload_to='media-files')
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
@@ -37,7 +38,9 @@ class BookReview(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     comment = models.TextField()
     stars = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
+    created_at = models.DateTimeField(auto_now_add=True)
 
+    objects = models.Manager
     def __str__(self):
         return f'{self.stars} stars by {self.user}'
 

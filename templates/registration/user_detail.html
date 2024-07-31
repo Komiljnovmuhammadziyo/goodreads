@@ -12,27 +12,34 @@
     <div class="mx-5">
         <div class="col-12">
             <h1>Profile page</h1>
-                <img class="profile-pic" src="{{ user.profile_picture.url }}" alt="{{ user.username }}">
-            <p>Username: {{ user.username }}</p>
-            <p>First_name: {{ user.first_name }}</p>
-            <p>Last_name: {{ user.last_name }}</p>
-            <p>Email: {{ user.email }}</p>
-            {% if request.user.is_authenticated %}
-                {% if user != request.user %}
-                    {% if is_following %}
-                        <form action="{% url 'user:unfollow_user' user.id %}" method="post">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-danger">Unfollow</button>
-                        </form>
-                    {% else %}
-                        <form action="{% url 'user:follow_user' user.id %}" method="post">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-primary">Follow</button>
-                        </form>
-                    {% endif %}
-                {% endif %}
-            {% endif %}
-
+            <div class="row">
+                <div class="col-2">
+                    <img class="profile-pic" src="{{ user.profile_picture.url }}" alt="{{ user.username }}">
+                </div>
+                <div class="col-6">
+                    <div class="mx-5">
+                        <p> <b>Username:</b> {{ user.username }}</p>
+                        <p> <b>First_name:</b> {{ user.first_name }}</p>
+                        <p><b>Last_name:</b> {{ user.last_name }}</p>
+                        <p><b>Email:</b> {{ user.email }}</p>
+                        {% if request.user.is_authenticated %}
+                            {% if user != request.user %}
+                                {% if is_following %}
+                                    <form action="{% url 'user:unfollow_user' user.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger">Unfollow</button>
+                                    </form>
+                                {% else %}
+                                    <form action="{% url 'user:follow_user' user.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-primary">Follow</button>
+                                    </form>
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.views import View
 
-from book.models import Book, BookReview
+import user
+from book.models import BookReview
+from user.models import CustomUser
 
 
 class landing_page(View):
@@ -11,12 +13,12 @@ class landing_page(View):
 
 class home_page(View):
         def get(self, request):
-            # book = Book.objects.get(book_id=book_id)
-            comments = BookReview.objects.all()
-
+            users = CustomUser.objects.all()
+            req_user = list(filter(lambda user: request.user.is_following(user), [user for user in users]))
+            comments = BookReview.objects.filter(user__in=req_user)
             context = {
-                # 'book': book,
                 'comments': comments,
+                'req_user': req_user
             }
 
             return render(request, 'home.html', context)

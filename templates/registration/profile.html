@@ -12,13 +12,21 @@
     <div class="mx-5">
         <div class="col-12">
             <h1>Profile page</h1>
-                <img class="profile-pic" src="{{ user.profile_picture.url }}" alt="{{ user.username }}">
-            <p>Username: {{ user.username }}</p>
-            <p>First_name: {{ user.first_name }}</p>
-            <p>Last_name: {{ user.last_name }}</p>
-            <p>Email: {{ user.email }}</p>
-            <a href="{% url 'user:update' %}"><button type="submit" class="btn btn-outline-success"><i class="fa-solid fa-edit"></i>   Edit</button></a>
+            <div class="row">
+                <div class="col-2">
+                    <img class="profile-pic" src="{{ user.profile_picture.url }}" alt="{{ user.username }}">
+                </div>
+                <div class="col-6">
+                    <div class="mx-5">
+                        <p>Username: {{ user.username }}</p>
+                        <p>First_name: {{ user.first_name }}</p>
+                        <p>Last_name: {{ user.last_name }}</p>
+                        <p>Email: {{ user.email }}</p>
+                        <a href="{% url 'user:update' %}"><button type="submit" class="btn btn-outline-success"><i class="fa-solid fa-edit"></i>   Edit</button></a>
+                    </div>
 
+                </div>
+            </div>
         </div>
     </div>
 </div>

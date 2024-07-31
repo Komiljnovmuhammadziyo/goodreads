@@ -84,6 +84,10 @@
     .default-style .ui-bordered {
         border: 1px solid rgba(24,28,33,0.06);
     }
+    .black_title {
+        color: black;
+        text-decoration: none;
+    }
     </style>
 </head>
 <body>
@@ -110,6 +114,11 @@
                     <a class="nav-link {% if request.path == add_author_url %} active {% endif %} active" href="{% url 'book:add-author' %}">Add author</a>
                 </li>
             {% endif %}
+          {% endif %}
+          {% if request.user.is_staff %}
+        <li class="nav-item">
+            <a class="nav-link active" href="{% url 'api:review-list' %}">API</a>
+        </li>
           {% endif %}
         <li class="nav-item">
           <a class="nav-link {% if request.path == book_page_url %} active {% endif %}" href="{% url 'user:user_list'%}">Users</a>

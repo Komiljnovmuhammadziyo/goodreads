@@ -20,7 +20,7 @@
                         {{ comment.comment }}
                     </p>
                     <center>
-                    <img class="cover-pic" src="{{ comment.book.image.url }}">
+                    <a href="{% url 'book:detail' comment.book.id %}"><img class="cover-pic" src="{{ comment.book.image.url }}"></a>
                 </center>
                 </div>
             </div>

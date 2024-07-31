@@ -117,7 +117,7 @@
           {% endif %}
           {% if request.user.is_staff %}
         <li class="nav-item">
-            <a class="nav-link active" href="{% url 'api:review-detail' 1 %}">API</a>
+            <a class="nav-link active" href="{% url 'api:review-list' %}">API</a>
         </li>
           {% endif %}
         <li class="nav-item">
